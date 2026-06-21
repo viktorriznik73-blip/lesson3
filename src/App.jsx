@@ -1,25 +1,36 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client' 
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
 import './App.css'
 
-const user = {
-    name: 'Itsuki Nakano',
-    imageUrl: 'https://i.pinimg.com/736x/ca/b3/c6/cab3c65398032f5b200e55540dc906dd.jpg',
-    imageSize: 150,
-};
+// создать const для 
+// создать input и кнопку submit для TO-DO List
 
-export default function Profile() {
-    return (
-        <>
-           <h1>{user.name}</h1>
-            <img src={user.imageUrl}
-             alt={'Photo of' + user.name}  style={{ width: user.imageSize,
-                height: user.imageSize
-             }}/>
-    </>
-    );
+function TodoList() {
+     const [inputValue, setInputValue] = useState("");
+     const [todos, setTodos] = useState([]);
+ function AddNewTask() {
+    if (inputValue.trim() !== '' ) {
+        const newTodo =  {
+            id: Date.now(),
+            text: inputValue,
+            isComplete: false
+        }
+
+        setTodos([...todos, newTodo]);
+
+        setInputValue("")
+    }
+ }
+
+ return (
+    <div>
+    <input className='inpur' value={inputValue} onChange={(e) => setInputValue(e.target.value)}placeholder='add new task'></input>
+    <button className='butto' onClick={AddNewTask}>NEW TASK</button>
+       <ul>
+        {todos.map((todo) => (
+<li key={todo.id}>{todo.text}</li>
+        ))}
+       </ul>
+    </div>
+ );
 }
+export default TodoList;

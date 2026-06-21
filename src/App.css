@@ -1,10 +1,31 @@
-.avatar {
-   font-family: 'Times New Roman', Times, serif;
-   border-radius: 10px;
-   color: red;
-   text-shadow: 20px black;
+body {
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+    display: flex;
 }
-.Itsuki {
-    border-radius: 50px red;
-    box-shadow: 0 20px 40px black;
+.inpur {
+    border-radius: 30px;
+    border: none;
+background-color: aquamarine;
+padding: 10px 20px 10px;
+transition: all 0.3s ease;
+}
+.butto {
+    position: relative;
+    background-color: aliceblue;
+    border: 2px solid black;
+    border-radius: 30px;
+    padding: 5px 10px 5px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    margin-left: 10px;
+}
+.butto:active {
+    transform: translateY(5px);
+}
+.inpur:hover {
+ transform: scale(1.03);
+ background-color: black;
+ border: 2px solid aliceblue;
 }
