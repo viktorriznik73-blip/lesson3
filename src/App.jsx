@@ -1,36 +1,84 @@
-import { useState } from 'react'
-import './App.css'
+import { useState, useEffect } from 'react';
+import './App.css';
 
-// создать const для 
-// создать input и кнопку submit для TO-DO List
+function HeaderTitle() {
+    return (
+        <div style={{textAlign: 'center', marginTop: '20px'}}>
+          <h1>Timer Test</h1>
+        </div>
+    )
+}
+function ToDoList() {
+   const [inputvalue, setInputValue] = useState("")
+   const [todos, setTodos] = useState([])
 
-function TodoList() {
-     const [inputValue, setInputValue] = useState("");
-     const [todos, setTodos] = useState([]);
+
  function AddNewTask() {
-    if (inputValue.trim() !== '' ) {
-        const newTodo =  {
+    if (inputvalue.trim() !== '') {
+        const newtodo = {
             id: Date.now(),
-            text: inputValue,
+            text: inputvalue,
             isComplete: false
         }
-
-        setTodos([...todos, newTodo]);
-
+        setTodos([...todos, newtodo])
         setInputValue("")
     }
- }
-
+}
+    function DeleteTask(idToDelete) {
+        const updateTodos = todos.filter(todo => todo.id !== idToDelete);
+        setTodos(updateTodos);
+    }
  return (
-    <div>
-    <input className='inpur' value={inputValue} onChange={(e) => setInputValue(e.target.value)}placeholder='add new task'></input>
-    <button className='butto' onClick={AddNewTask}>NEW TASK</button>
-       <ul>
+    <div style={{textAlign: 'center', marginTop: '40px', borderTop: '1px solid #ff0000', paddingTop: '20px'}}>
+        <h1 style={{}}>TodoList</h1>
+       <input
+       className='inpur'
+       value={inputvalue}
+       onChange={(e) => setInputValue(e.target.value)}
+       placeholder='Type text'
+       style={{padding: '8px', fontSize: '16px'}}
+       />
+       <button onClick={AddNewTask} className='butto' style={{padding: '8px 15px', marginLeft: '10px', cursor: 'pointer'}}>
+        NEW TASK
+       </button>
+       <ul style={{listStyleType: 'none', padding: '0', marginTop: '20px'}}>
         {todos.map((todo) => (
-<li key={todo.id}>{todo.text}</li>
+        <li key={todo.id} style={{margin: '5px 0', fontSize: '18px'}}>{todo.text}
+            <button onClick={() => DeleteTask(todo.id)} style={{marginLeft: '15px', cursor: 'pointer', padding: '10px 20px',}} className='bum'>DELETE</button>
+        </li>
         ))}
        </ul>
     </div>
- );
+ )
 }
-export default TodoList;
+export default function App() {
+    const [timer, setTimer] = useState("")
+    const [isRunning,setIsRunning] = useState(false)
+    useEffect(() => {
+        let interval = null;
+      if (isRunning) {
+        interval = setInterval(() => {
+            const now = new Date();
+            setTimer(now.toLocaleString());
+        }, 1000)
+    } else {
+        clearInterval(interval)
+    }
+    return () => clearInterval(interval)
+    }, [isRunning])
+    const handleToggle = () => {
+        setIsRunning(!isRunning)
+            if (isRunning) {
+                setTimer(new Date().toLocaleString());
+            }
+        };
+        return (
+            <div style={{textAlign: 'center'}}>
+                <HeaderTitle />
+                <button onClick={handleToggle} style={{padding: '10px 20px', fontSize: '18px', cursor: 'pointer', borderRadius: '50px'}}>
+                    {isRunning ? `Now is ${timer}` : 'Start timer'}
+                </button>
+                <ToDoList />
+            </div>
+        )
+}  

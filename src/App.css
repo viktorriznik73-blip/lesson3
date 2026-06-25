@@ -1,5 +1,5 @@
 body {
-    background-color: white;
+    background-color: aliceblue;
     align-items: center;
     justify-content: center;
     display: flex;
@@ -20,12 +20,20 @@ transition: all 0.3s ease;
     font-weight: bold;
     transition: all 0.3s ease;
     margin-left: 10px;
+    box-shadow: 0 10px 20px black;
 }
 .butto:active {
     transform: translateY(5px);
 }
 .inpur:hover {
  transform: scale(1.03);
- background-color: black;
+ background-color: rgb(255, 255, 255);
  border: 2px solid aliceblue;
+}
+.bum {
+    color: white;
+    background-color: red;
+    border-radius: 30px;
+    box-shadow: 0 10px 20px black;
+    border: 2px solid white;
 }

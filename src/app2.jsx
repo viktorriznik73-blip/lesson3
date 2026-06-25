@@ -4,7 +4,7 @@ import './App.css'
 // зделать функцию для кнопки
 // зделать функцию для таймера
 
- function MyButton() {
+ function HeaderTitle() {
   return (
     <div style={{textAlign: 'center', marginTop: '20px'}}>
         <h1>Timer test</h1>
@@ -37,12 +37,12 @@ export default function ShowTimer() {
 
     return (
         <div style={{ textAlign: 'center' }}>
-            <MyButton />
+            <HeaderTitle />
 
             <button onClick={handleToggle} style={{ padding: '10px 20px', fontSize: '18px', cursor: 'pointer' }}>
                 {isRunning ? `Now is ${timer}` : "Start timer"}
             </button>
-
+       
         </div>
     )
     }
